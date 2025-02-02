@@ -1,0 +1,11 @@
+{
+  "tasks": {
+    "run": "deno run -A --unstable-cron --unstable-ffi src/main.ts"
+  },
+  "imports": {
+    "atproto": "npm:@atproto/api@^0.13.32",
+    "canvas": "jsr:@gfx/canvas@^0.5.8",
+    "dotenv": "jsr:@std/dotenv/load",
+    "wretch": "npm:wretch@^2.11.0"
+  }
+}
