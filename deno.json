@@ -4,10 +4,10 @@
     "run": "deno run -A --unstable-cron --unstable-ffi src/main.ts"
   },
   "imports": {
+    "@napi-rs/canvas-linux-x64-gnu": "npm:@napi-rs/canvas-linux-x64-gnu@^0.1.67",
+    "canvas": "npm:@napi-rs/canvas@^0.1.67",
     "atproto": "npm:@atproto/api@^0.14.4",
-    "canvas": "npm:canvas@^3.1.0",
     "dotenv": "jsr:@std/dotenv/load",
     "wretch": "npm:wretch@^2.11.0"
-  },
-  "nodeModulesDir": "auto"
+  }
 }

@@ -1,9 +1,9 @@
 import { Record } from './main.ts';
-import { createCanvas, registerFont } from 'canvas';
+import { createCanvas, GlobalFonts } from 'canvas';
 
 export function getImage(record: Record): Uint8Array {
-  registerFont('./fonts/cubing-icons.ttf', { family: 'cubing-icons' });
-  registerFont('./fonts/montserrat.ttf', { family: 'Montserrat' });
+  GlobalFonts.registerFromPath('./fonts/cubing-icons.woff2', 'cubing-icons');
+  GlobalFonts.registerFromPath('./fonts/montserrat.ttf', 'Montserrat');
 
   const canvas = createCanvas(1000, 1000);
   const ctx = canvas.getContext('2d');
@@ -24,16 +24,15 @@ export function getImage(record: Record): Uint8Array {
   ctx.fillStyle = 'white';
   ctx.textAlign = 'center';
 
-  ctx.font = '36px Montserrat'; // 2.25 rem
+  ctx.font = '2.25rem Montserrat';
   ctx.fillText(`${record.event} ${record.type} ${record.tag}`, 500, 100);
   ctx.fillText(`by ${record.person}`, 500, 175);
 
-  ctx.font = '224px cubing-icons'; // 14 rem
+  ctx.font = '14rem cubing-icons';
   ctx.fillText(record.icon, 500, 610);
 
-  ctx.font = '192px Montserrat'; // 12 rem
+  ctx.font = '12rem Montserrat';
   ctx.fillText(record.time.toString(), 500, 925);
 
-  // console.log(canvas.toDataURL());
-  return canvas.toBuffer();
+  return canvas.toBuffer('image/png');
 }
