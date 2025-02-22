@@ -1,11 +1,13 @@
 {
+  "$schema": "https://deno.land/x/deno/cli/schemas/config-file.v1.json",
   "tasks": {
     "run": "deno run -A --unstable-cron --unstable-ffi src/main.ts"
   },
   "imports": {
-    "atproto": "npm:@atproto/api@^0.13.32",
-    "canvas": "jsr:@gfx/canvas@^0.5.8",
+    "atproto": "npm:@atproto/api@^0.14.4",
+    "canvas": "npm:canvas@^3.1.0",
     "dotenv": "jsr:@std/dotenv/load",
     "wretch": "npm:wretch@^2.11.0"
-  }
+  },
+  "nodeModulesDir": "auto"
 }

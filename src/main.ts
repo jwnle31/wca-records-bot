@@ -20,7 +20,7 @@ Deno.cron('new post', { minute: { every: 10 } }, async () => {
     console.log('new record in', record.event);
 
     console.log('generating image');
-    const image = await getImage(record);
+    const image = getImage(record);
 
     console.log('uploading image');
     const {

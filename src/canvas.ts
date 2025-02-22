@@ -1,12 +1,9 @@
 import { Record } from './main.ts';
-import { createCanvas, Fonts } from 'canvas';
+import { createCanvas, registerFont } from 'canvas';
 
-export async function getImage(record: Record): Promise<Uint8Array> {
-  const cubingIcons = await Deno.readFile('./fonts/cubing-icons.woff2');
-  Fonts.register(cubingIcons);
-
-  const montserrat = await Deno.readFile('./fonts/montserrat.ttf');
-  Fonts.register(montserrat);
+export function getImage(record: Record): Uint8Array {
+  registerFont('./fonts/cubing-icons.ttf', { family: 'cubing-icons' });
+  registerFont('./fonts/montserrat.ttf', { family: 'Montserrat' });
 
   const canvas = createCanvas(1000, 1000);
   const ctx = canvas.getContext('2d');
@@ -27,16 +24,16 @@ export async function getImage(record: Record): Promise<Uint8Array> {
   ctx.fillStyle = 'white';
   ctx.textAlign = 'center';
 
-  ctx.font = '2.25rem Montserrat';
+  ctx.font = '36px Montserrat'; // 2.25 rem
   ctx.fillText(`${record.event} ${record.type} ${record.tag}`, 500, 100);
   ctx.fillText(`by ${record.person}`, 500, 175);
 
-  ctx.font = '14rem cubing-icons';
+  ctx.font = '224px cubing-icons'; // 14 rem
   ctx.fillText(record.icon, 500, 610);
 
-  ctx.font = '12rem Montserrat';
+  ctx.font = '192px Montserrat'; // 12 rem
   ctx.fillText(record.time.toString(), 500, 925);
 
-  // canvas.save('image.png');
-  return canvas.encode();
+  // console.log(canvas.toDataURL());
+  return canvas.toBuffer();
 }

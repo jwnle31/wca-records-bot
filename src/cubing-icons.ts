@@ -1,5 +1,5 @@
 // from https://www.npmjs.com/package/@cubing/icons/v/3.0.3?activeTab=code
-// ^/dist/lib/@cubing/icons/cubing-icons.woff2 -> /fonts/cubing-icons
+// ^/dist/lib/@cubing/icons/cubing-icons.woff2 -> convert via https://cloudconvert.com/woff2-to-ttf -> /fonts/cubing-icons.ttf
 
 // ^/dist/lib/@cubing/icons/js/dist/lib/@cubing/icons/cubing-icons.js
 // https://github.com/thewca/wca-live/blob/main/lib/wca_live/wca/event.ex for more accurate names
