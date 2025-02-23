@@ -1,5 +1,6 @@
-import { Record } from './main.ts';
-import { createCanvas, GlobalFonts } from 'canvas';
+import { Record } from './main.js';
+import { createCanvas, GlobalFonts } from '@napi-rs/canvas';
+import { join } from 'node:path';
 
 export function getImage(record: Record): Uint8Array {
   GlobalFonts.registerFromPath('./fonts/cubing-icons.woff2', 'cubing-icons');
@@ -24,14 +25,14 @@ export function getImage(record: Record): Uint8Array {
   ctx.fillStyle = 'white';
   ctx.textAlign = 'center';
 
-  ctx.font = '2.25rem Montserrat';
+  ctx.font = '48px Montserrat'; // 3rem
   ctx.fillText(`${record.event} ${record.type} ${record.tag}`, 500, 100);
   ctx.fillText(`by ${record.person}`, 500, 175);
 
-  ctx.font = '14rem cubing-icons';
+  ctx.font = '16rem cubing-icons';
   ctx.fillText(record.icon, 500, 610);
 
-  ctx.font = '12rem Montserrat';
+  ctx.font = '14rem Montserrat';
   ctx.fillText(record.time.toString(), 500, 925);
 
   return canvas.toBuffer('image/png');
