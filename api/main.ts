@@ -15,13 +15,10 @@ export default async (_, response) => {
     .setProject('wca-records')
     .setKey(process.env.APPWRITE_API_KEY);
   const db = new aw.Databases(client);
-  let prevIds = (await db.getDocument('db', 'collection', 'prev-ids')).ids as string[];
-
-  prevIds = prevIds.filter((x) => x !== '3315936-single'); // TODO REMOVE
+  const prevIds = (await db.getDocument('db', 'collection', 'prev-ids')).ids as string[];
 
   console.log(`refetching records (prev record count: ${prevIds.length})`);
   const newRecords = await getRecords();
-  // console.log(newRecords);
 
   for await (const record of newRecords.filter((r) => !prevIds.includes(r.id))) {
     console.log('new record in', record.event);

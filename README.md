@@ -1,13 +1,7 @@
 # WCA Records Bot [@wca.voytxt.com](https://bsky.app/profile/wca.voytxt.com)
 
-Posts the latest Rubik's cube records to Bluesky. Uses Deno Deploy.
+cron-job.org calls a vercel serverless function every 10 mins, that gets the latest records from the wca live api and the prev records from the appwrite db and if there's a new record, it creates an image of the record (via npm canvas) and posts it to bluesky
 
-[deno wasm canvas](https://jsr.io/@gfx/canvas-wasm) needed write access to function properly, which is not possible on deno deploy, so i tried to use [npm canvas](https://www.npmjs.com/package/canvas) instead, that gave the `Error: Cannot find module '../build/Release/canvas.node'` error even after running `deno install --allow-scripts=npm:canvas` on deno deploy as an install step
+originally i tried to use deno instead of node, but it just didn't want to work... deno deploy doesn't let you change files, which was needed in all canvas libs i tried (both from jsr and npm), and the vercel deno support is too outdated for anything to work properly
 
-ight i give up on denoy deploy :wave:, time to use vercel
-
-sadly vercel deno support (https://github.com/vercel-community/deno) doesn't really work, like at all; so imma just rewrite everything in nodejs
-
-yeah vercel serverless functions + cron-job.org is op, no idea if it'll actually work, but we'll see
-
-todo: cleanup the code, it's a freaking mess rn
+i also tried to use npm @napi-rs/canvas instead of npm canvas, but for some weird reason, it doesn't render fonts at all on the server (https://github.com/Brooooooklyn/canvas/issues/731); npm canvas doesn't support rem as units, woff2 fonts, and is slower, but at least the text rendering works

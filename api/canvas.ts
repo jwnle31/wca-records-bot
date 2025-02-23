@@ -1,10 +1,10 @@
 import { Record } from './main.js';
-import { createCanvas, GlobalFonts } from '@napi-rs/canvas';
-import { join } from 'node:path';
+import { createCanvas, registerFont } from 'canvas';
+import path from 'path';
 
 export function getImage(record: Record): Uint8Array {
-  GlobalFonts.registerFromPath('./fonts/cubing-icons.woff2', 'cubing-icons');
-  GlobalFonts.registerFromPath('./fonts/montserrat.ttf', 'Montserrat');
+  registerFont(path.join(process.cwd(), 'fonts', 'cubing-icons.ttf'), { family: 'cubing-icons' });
+  registerFont(path.join(process.cwd(), 'fonts', 'montserrat.ttf'), { family: 'Montserrat' });
 
   const canvas = createCanvas(1000, 1000);
   const ctx = canvas.getContext('2d');
@@ -25,14 +25,14 @@ export function getImage(record: Record): Uint8Array {
   ctx.fillStyle = 'white';
   ctx.textAlign = 'center';
 
-  ctx.font = '48px Montserrat'; // 3rem
+  ctx.font = '48px Montserrat';
   ctx.fillText(`${record.event} ${record.type} ${record.tag}`, 500, 100);
   ctx.fillText(`by ${record.person}`, 500, 175);
 
-  ctx.font = '16rem cubing-icons';
+  ctx.font = '256px cubing-icons';
   ctx.fillText(record.icon, 500, 610);
 
-  ctx.font = '14rem Montserrat';
+  ctx.font = '224px Montserrat';
   ctx.fillText(record.time.toString(), 500, 925);
 
   return canvas.toBuffer('image/png');

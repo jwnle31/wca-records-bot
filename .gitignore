@@ -1,6 +1,3 @@
 .env
-image.png
-api/test.ts
-api/hello.ts
 node_modules
 .vercel
