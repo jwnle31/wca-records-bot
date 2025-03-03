@@ -1,7 +1,7 @@
 import wretch from 'wretch';
 import { Record } from './main.js';
 import { getIcon } from './cubing-icons.js';
-import { capitalizeFirstLetter, formatAttemptResult } from './format.js';
+import { capitalizeFirstLetter, formatAttemptResult } from './format';
 
 export async function getRecords(): Promise<Record[]> {
   const response = await wretch('https://live.worldcubeassociation.org/api')
@@ -51,7 +51,7 @@ export async function getRecords(): Promise<Record[]> {
     );
 
   return response.data.recentRecords
-    .filter((r) => r.result.round.competitionEvent.event.id === '333mbf')
+    .filter((r) => r.tag !== 'NR')
     .map((r) => ({
       id: r.id,
       tag: r.tag as 'WR' | 'CR',
@@ -64,11 +64,3 @@ export async function getRecords(): Promise<Record[]> {
       icon: getIcon(r.result.round.competitionEvent.event.id),
     }));
 }
-
-async function test() {
-  const lol = await getRecords();
-  console.log(lol);
-}
-
-test();
-
